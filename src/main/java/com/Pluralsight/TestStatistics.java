@@ -1,35 +1,40 @@
-package com.Pluralsight;
-
 import java.util.Arrays;
 
 public class TestStatistics {
-
     public static void main(String[] args) {
-        int[] testScores = {30, 50, 40, 65, 76, 87, 38, 32, 80, 99};
+
+        int[] scores = {85, 90, 78, 92, 88, 76, 95, 89, 84, 91};
 
         int sum = 0;
-        int high = testScores[0];
+        int high = scores[0];
+        int low = scores[0];
 
+        for (int score : scores) {
+            sum += score;
 
-        for (int testScore : testScores) {
-            sum += testScore;
-
+            if (score > high) high = score;
+            if (score < low) low = score;
         }
-        for (int i = 0; i < testScores.length; i++) {
-            if (testScores[i] > high) {
-                high = testScores[i];
-            }
 
+        double average = (double) sum / scores.length;
 
-            System.out.println(" The sum is " + sum);
+        // Sort array for median
+        Arrays.sort(scores);
 
-            System.out.println("Average is " + sum / testScores.length);
+        double median;
+        int middle = scores.length / 2;
 
-            System.out.println("HighScore is " + Arrays.stream(testScores).max());
+        // Even number of elements (10 scores)
+        median = (scores[middle - 1] + scores[middle]) / 2.0;
 
-            System.out.println(" Low score is " + Arrays.stream(testScores).min());
-        }
-        System.out.println(" High is  "+ high);
+        // Difference between average and median
+        double difference = average - median;
 
+        // Display results
+        System.out.println("Average: " + average);
+        System.out.println("High Score: " + high);
+        System.out.println("Low Score: " + low);
+        System.out.println("Median: " + median);
+        System.out.println("Difference (Average - Median): " + difference);
     }
 }
